@@ -21,6 +21,9 @@ app.get('/api/inicio', inicioController.getInicio);
 const inventarioRoutes = require('./routes/inventario');
 app.use('/api/inventario', inventarioRoutes);
 
+const prestamoRoutes = require('./routes/prestamo');
+app.use('/api/prestamos', prestamoRoutes);
+
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
