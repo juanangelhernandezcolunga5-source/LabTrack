@@ -54,3 +54,23 @@ INSERT INTO prestamos (usuario_id, equipo_id, estado) VALUES
 (2, 3, 'Completado'), 
 (2, 4, 'Retrasado'), 
 (2, 5, 'Activo');
+
+
+CREATE TABLE IF NOT EXISTS mantenimiento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    equipo_id INT NOT NULL,
+    tipo ENUM('Preventivo', 'Correctivo') NOT NULL,
+    descripcion TEXT NOT NULL,
+    tecnico_asignado VARCHAR(100) DEFAULT 'Sin Asignar',
+    fecha_reporte DATETIME DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('Pendiente', 'En Progreso', 'Completado') DEFAULT 'Pendiente',
+    FOREIGN KEY (equipo_id) REFERENCES inventario(id)
+);
+
+
+INSERT INTO mantenimiento (equipo_id, tipo, descripcion, tecnico_asignado, fecha_reporte, estado) VALUES
+(5, 'Correctivo', 'Pantalla con líneas horizontales', 'Carlos Mendoza', '2026-04-18 10:00:00', 'En Progreso'),
+(4, 'Preventivo', 'Limpieza interna y cambio de pasta térmica', 'Carlos Mendoza', '2026-04-20 11:30:00', 'Pendiente'),
+(3, 'Correctivo', 'Batería no carga', 'Roberto Sánchez', '2026-04-15 09:15:00', 'Completado'),
+(1, 'Preventivo', 'Actualización de firmware y revisión de configuración', 'Roberto Sánchez', '2026-04-22 14:00:00', 'Pendiente'),
+(2, 'Correctivo', 'Revisión de puertos dañados', 'Sin Asignar', CURRENT_TIMESTAMP, 'Pendiente');

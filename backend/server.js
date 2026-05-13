@@ -24,6 +24,11 @@ app.use('/api/inventario', inventarioRoutes);
 const prestamoRoutes = require('./routes/prestamo');
 app.use('/api/prestamos', prestamoRoutes);
 
+const mantenimiento = require('./routes/mantenimiento'); 
+
+
+app.use('/api/mantenimiento', mantenimiento);
+
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
