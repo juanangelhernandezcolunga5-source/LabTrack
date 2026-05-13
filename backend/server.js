@@ -26,8 +26,10 @@ app.use('/api/prestamos', prestamoRoutes);
 
 const mantenimiento = require('./routes/mantenimiento'); 
 
-
 app.use('/api/mantenimiento', mantenimiento);
+
+const laboratorio = require('./routes/laboratorio');
+app.use('/api/laboratorios', laboratorio);
 
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;

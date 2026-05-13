@@ -13,9 +13,7 @@ CREATE TABLE usuarios (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Inserción de 2 usuarios (Admin y Estudiante)
--- La contraseña para AMBOS es: 123456
--- El código largo es el hash encriptado que entiende tu servidor.
+
 INSERT INTO usuarios (nombre, email, password, rol) VALUES 
 ('Administrador', 'admin@itsr.edu.mx', '$2b$10$76/XqF9kYxK6.K7W0e0fZeU5r.j9V6V9v.n2/q/V/5G6I7J8K9L0M', 'admin'),
 ('Juan Estudiante', 'estudiante@itsr.edu.mx', '$2b$10$76/XqF9kYxK6.K7W0e0fZeU5r.j9V6V9v.n2/q/V/5G6I7J8K9L0M', 'estudiante');
@@ -74,3 +72,21 @@ INSERT INTO mantenimiento (equipo_id, tipo, descripcion, tecnico_asignado, fecha
 (3, 'Correctivo', 'Batería no carga', 'Roberto Sánchez', '2026-04-15 09:15:00', 'Completado'),
 (1, 'Preventivo', 'Actualización de firmware y revisión de configuración', 'Roberto Sánchez', '2026-04-22 14:00:00', 'Pendiente'),
 (2, 'Correctivo', 'Revisión de puertos dañados', 'Sin Asignar', CURRENT_TIMESTAMP, 'Pendiente');
+
+
+
+CREATE TABLE IF NOT EXISTS laboratorios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(50) NOT NULL,
+    encargado VARCHAR(100) DEFAULT 'Sin Asignar',
+    estado ENUM('Disponible', 'En Mantenimiento', 'Cerrado') DEFAULT 'Disponible'
+);
+
+
+INSERT INTO laboratorios (nombre, ubicacion, encargado, estado) VALUES
+('Laboratorio Cisco', 'Edificio K', 'Ing. Tello', 'Disponible'),
+('Centro de Cómputo', 'Edificio K', 'ING. Armando', 'Disponible'),
+('Laboratorio de Robotica', 'Edificio K', 'Ing. Salome', 'En Mantenimiento'),
+('Laboratorio industrial', 'Edificio C', 'Ing. Javier', 'Disponible'),
+('Laboratorio de Quimica', 'Edificio F', 'Sin Asignar', 'Cerrado');
