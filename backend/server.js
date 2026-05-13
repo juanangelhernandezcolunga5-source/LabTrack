@@ -10,6 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Permite recibir datos en formato JSON [cite: 184]
 
+
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+
 // Ruta de bienvenida (Requisito del proyecto) [cite: 186-188]
 app.get('/api/inicio', (req, res) => {
     res.json({ 
