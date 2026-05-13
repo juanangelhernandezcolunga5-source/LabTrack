@@ -18,6 +18,9 @@ app.use('/api/auth', authRoutes);
 const inicioController = require('./controllers/inicioController');
 app.get('/api/inicio', inicioController.getInicio);
 
+const inventarioRoutes = require('./routes/inventario');
+app.use('/api/inventario', inventarioRoutes);
+
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
