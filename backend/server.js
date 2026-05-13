@@ -14,13 +14,9 @@ app.use(express.json()); // Permite recibir datos en formato JSON [cite: 184]
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-// Ruta de bienvenida (Requisito del proyecto) [cite: 186-188]
-app.get('/api/inicio', (req, res) => {
-    res.json({ 
-        mensaje: "Bienvenido al sistema LabTrack", 
-        fecha: new Date().toISOString() 
-    });
-});
+// Ruta de bienvenida (Requisito del proyecto) 
+const inicioController = require('./controllers/inicioController');
+app.get('/api/inicio', inicioController.getInicio);
 
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;
