@@ -1,4 +1,5 @@
 const Inventario = require('../models/inventarioModel');
+const db = require('../config/db');
 
 const inventarioCtrl = {
     // Obtener todos
@@ -61,7 +62,15 @@ const inventarioCtrl = {
             if (result.affectedRows === 0) return res.status(404).json({ mensaje: 'Equipo no encontrado para eliminar' });
             res.json({ mensaje: 'Equipo eliminado exitosamente' });
         });
+    },
+
+    getByStockBajo: (req, res) => {
+        db.query("SELECT * FROM inventario WHERE cantidad <= 3", (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json(results);
+        });
     }
+
 };
 
 module.exports = inventarioCtrl;

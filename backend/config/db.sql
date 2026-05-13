@@ -16,3 +16,10 @@ CREATE TABLE IF NOT EXISTS inventario (
     cantidad INT NOT NULL DEFAULT 0,
     estado VARCHAR(20) DEFAULT 'Disponible'
 );
+
+INSERT INTO inventario (nombre, categoria, cantidad, estado) VALUES
+('Router Cisco 2900', 'Redes', 5, 'Disponible'),
+('Switch 24 Puertos', 'Redes', 8, 'Disponible'),
+('Arduino UNO', 'Electrónica',1, 'Stock Bajo'),
+('Raspberry Pi 4', 'Cómputo', 3, 'Stock Bajo'),
+('Multímetro Digital', 'Electrónica', 12, 'Disponible');
