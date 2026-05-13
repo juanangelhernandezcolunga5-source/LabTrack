@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Administrador</h4>
+                    <p>admin@itsr.edu.mx</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-tachometer-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+                <a href="inventario.html" class="menu-item active">
+                    <i class="fas fa-boxes menu-item-icon"></i>
+                    <span class="menu-item-text">Inventario</span>
+                </a>
+                <a href="prestamos.html" class="menu-item">
+                    <i class="fas fa-hand-holding menu-item-icon"></i>
+                    <span class="menu-item-text">Préstamos</span>
+                </a>
+                <a href="mantenimiento.html" class="menu-item">
+                    <i class="fas fa-tools menu-item-icon"></i>
+                    <span class="menu-item-text">Mantenimiento</span>
+                </a>
+                <a href="catalogo.html" class="menu-item">
+                    <i class="fas fa-store menu-item-icon"></i>
+                    <span class="menu-item-text">Ver Catálogo</span>
+                </a>
+                <a href="configuracion-admin.html" class="menu-item">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Configuración</span>
+                </a>
+                <a href="login.html" class="menu-item" style="margin-top: 50px; color: var(--danger);">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Gestión de Inventario</h1>
+                    <p class="page-subtitle">Administra los equipos y componentes del laboratorio</p>
+                </div>
+                <button class="add-btn">
+                    <i class="fas fa-plus"></i>
+                    Agregar Nuevo Equipo
+                </button>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar equipo por nombre...">
+                </div>
+                <div class="filters">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="all">Todas las categorías</option>
+                        <option value="Redes">Redes</option>
+                        <option value="Electrónica">Electrónica</option>
+                        <option value="Cómputo">Cómputo</option>
+                    </select>
+                    <select class="filter-select" id="estadoFilter">
+                        <option value="all">Todos los estados</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="no_disponible">No Disponible</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid">
+                <!-- Router Cisco -->
+                <div class="product-card" data-category="Redes">
+                    <div class="product-image">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Redes</div>
+                        <h3 class="product-name">Router Cisco 2900</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge available">Disponible</span>
+                            <span>5 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(1)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(1)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Switch 24 Puertos -->
+                <div class="product-card" data-category="Redes">
+                    <div class="product-image">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Redes</div>
+                        <h3 class="product-name">Switch 24 Puertos</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge available">Disponible</span>
+                            <span>8 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(2)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(2)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arduino UNO -->
+                <div class="product-card" data-category="Electrónica">
+                    <div class="product-image">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electrónica</div>
+                        <h3 class="product-name">Arduino UNO</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge available">Disponible</span>
+                            <span>15 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(3)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(3)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raspberry Pi 4 -->
+                <div class="product-card" data-category="Cómputo">
+                    <div class="product-image">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Cómputo</div>
+                        <h3 class="product-name">Raspberry Pi 4</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge low">Stock Bajo</span>
+                            <span>3 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(4)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(4)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multímetro Digital -->
+                <div class="product-card" data-category="Electrónica">
+                    <div class="product-image">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electrónica</div>
+                        <h3 class="product-name">Multímetro Digital</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge available">Disponible</span>
+                            <span>12 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(5)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(5)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cable Ethernet Cat6 -->
+                <div class="product-card" data-category="Redes">
+                    <div class="product-image">
+                        <i class="fas fa-ethernet"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Redes</div>
+                        <h3 class="product-name">Cable Ethernet Cat6</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge available">Disponible</span>
+                            <span>50 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(6)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(6)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laptop Dell Inspiron -->
+                <div class="product-card" data-category="Cómputo">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Cómputo</div>
+                        <h3 class="product-name">Laptop Dell Inspiron</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge low">Stock Bajo</span>
+                            <span>2 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(7)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(7)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Osciloscopio Digital -->
+                <div class="product-card" data-category="Electrónica">
+                    <div class="product-image">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electrónica</div>
+                        <h3 class="product-name">Osciloscopio Digital</h3>
+                        <div class="product-stock">
+                            <span class="stock-badge out">Agotado</span>
+                            <span>0 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-btn" onclick="editEquipment(8)">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="delete-btn" onclick="deleteEquipment(8)">
+                                <i class="fas fa-trash"></i> Baja
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

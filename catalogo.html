@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Equipos - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Juan Angel H.</h4>
+                    <p>22224029</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="catalogo.html" class="menu-item active">
+                    <i class="fas fa-store menu-item-icon"></i>
+                    <span class="menu-item-text">Catálogo</span>
+                </a>
+                <a href="mis-prestamos.html" class="menu-item">
+                    <i class="fas fa-hand-holding menu-item-icon"></i>
+                    <span class="menu-item-text">Mis Préstamos</span>
+                </a>
+                <a href="configuracion-estudiante.html" class="menu-item">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Mi Perfil</span>
+                </a>
+                <a href="login.html" class="menu-item" style="margin-top: 50px; color: var(--danger);">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Catálogo de Equipos</h1>
+                    <p class="page-subtitle">Consulta la disponibilidad y solicita préstamos</p>
+                </div>
+            </div>
+
+            <!-- Catalog Layout -->
+            <div class="catalog-layout">
+                <!-- Sidebar Filters -->
+                <aside class="catalog-sidebar">
+                    <h3><i class="fas fa-filter"></i> Filtros</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Buscar</h4>
+                        <input type="text" class="form-input" id="catalogSearch" placeholder="Nombre del equipo...">
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Área</h4>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-redes" value="Redes">
+                                <label for="filter-redes">Redes</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-electronica" value="Electrónica">
+                                <label for="filter-electronica">Electrónica</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-computo" value="Cómputo">
+                                <label for="filter-computo">Cómputo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Estado</h4>
+                        <div class="filter-options status-filter">
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-available" value="available">
+                                <label for="filter-available">Disponible</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-low" value="low">
+                                <label for="filter-low">Stock Bajo</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="filter-out" value="out">
+                                <label for="filter-out">Agotado</label>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="catalog-products">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

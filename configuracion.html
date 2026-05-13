@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Administrador</h4>
+                    <p>admin@itsr.edu.mx</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="configuracion-admin.html" class="menu-item active">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Configuración</span>
+                </a>
+                <a href="#" class="menu-item" onclick="logout(); return false;" style="margin-top: 50px; color: var(--danger);">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Configuración</h1>
+                    <p class="page-subtitle">Administra tu perfil y preferencias del sistema</p>
+                </div>
+            </div>
+
+            <!-- Settings Layout -->
+            <div class="settings-layout">
+                <!-- Settings Navigation -->
+                <aside class="settings-nav">
+                    <div class="settings-nav-item active" data-section="perfil">
+                        <i class="fas fa-user"></i>
+                        <span>Mi Perfil</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="notificaciones">
+                        <i class="fas fa-bell"></i>
+                        <span>Notificaciones</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="seguridad">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Seguridad</span>
+                    </div>
+                    <div class="settings-nav-item" data-section="sistema">
+                        <i class="fas fa-cogs"></i>
+                        <span>Sistema</span>
+                    </div>
+                </aside>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Perfil Section -->
+                    <div class="settings-section" id="perfilSection">
+                        <h3><i class="fas fa-user"></i> Información del Perfil</h3>
+                        <form class="settings-form" id="profileForm">
+                            <div class="form-group">
+                                <label class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-input" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-input" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-input" value="(487) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cargo</label>
+                                <input type="text" class="form-input" value="Administrador de Laboratorio" disabled>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Guardar Cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Notificaciones Section -->
+                    <div class="settings-section" id="notificacionesSection" style="display: none;">
+                        <h3><i class="fas fa-bell"></i> Preferencias de Notificaciones</h3>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Notificaciones de Préstamos</span>
+                                <span>Recibe alertas cuando se solicite un nuevo préstamo</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Notificaciones de Devoluciones</span>
+                                <span>Recibe alertas cuando un equipo esté próximo a vencer</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Notificaciones de Mantenimiento</span>
+                                <span>Recibe alertas sobre reportes de fallas</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Notificaciones de Retrasos</span>
+                                <span>Recibe alertas cuando un préstamo esté retrasado</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Correo Electrónico</span>
+                                <span>Recibe notificaciones por correo electrónico</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Seguridad Section -->
+                    <div class="settings-section" id="seguridadSection" style="display: none;">
+                        <h3><i class="fas fa-shield-alt"></i> Seguridad de la Cuenta</h3>
+                        
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label class="form-label">Contraseña Actual</label>
+                                <input type="password" class="form-input" placeholder="Ingresa tu contraseña actual">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nueva Contraseña</label>
+                                <input type="password" class="form-input" placeholder="Ingresa la nueva contraseña">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-input" placeholder="Confirma la nueva contraseña">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-lock"></i> Cambiar Contraseña
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="danger-zone">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Zona de Peligro</h4>
+                            <p>Una vez que elimines tu cuenta, no hay vuelta atrás. Por favor ten cuidado.</p>
+                            <button class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Eliminar Mi Cuenta
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sistema Section -->
+                    <div class="settings-section" id="sistemaSection" style="display: none;">
+                        <h3><i class="fas fa-cogs"></i> Configuración del Sistema</h3>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Modo Oscuro</span>
+                                <span>Cambia la apariencia del sistema a modo oscuro</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Préstamos Automáticos</span>
+                                <span>Aprobar automáticamente préstamos que cumplan los criterios</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Recordatorios Automáticos</span>
+                                <span>Enviar recordatorios automáticos de devolución</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <span>Exportar Datos</span>
+                                <span>Permitir exportación de datos a Excel/CSV</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout Button -->
+            <div style="margin-top: 30px; text-align: center;">
+                <button class="btn btn-danger btn-lg" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

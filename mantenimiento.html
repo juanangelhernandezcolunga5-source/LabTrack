@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mantenimiento - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Administrador</h4>
+                    <p>admin@itsr.edu.mx</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-tachometer-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+                <a href="inventario.html" class="menu-item">
+                    <i class="fas fa-boxes menu-item-icon"></i>
+                    <span class="menu-item-text">Inventario</span>
+                </a>
+                <a href="prestamos.html" class="menu-item">
+                    <i class="fas fa-hand-holding menu-item-icon"></i>
+                    <span class="menu-item-text">Préstamos</span>
+                </a>
+                <a href="mantenimiento.html" class="menu-item active">
+                    <i class="fas fa-tools menu-item-icon"></i>
+                    <span class="menu-item-text">Mantenimiento</span>
+                </a>
+                <a href="catalogo.html" class="menu-item">
+                    <i class="fas fa-store menu-item-icon"></i>
+                    <span class="menu-item-text">Ver Catálogo</span>
+                </a>
+                <a href="configuracion-admin.html" class="menu-item">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Configuración</span>
+                </a>
+                <a href="login.html" class="menu-item" style="margin-top: 50px; color: var(--danger);">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Gestión de Mantenimiento</h1>
+                    <p class="page-subtitle">Registra y da seguimiento a fallas y mantenimientos</p>
+                </div>
+                <button class="add-btn">
+                    <i class="fas fa-plus"></i>
+                    Nuevo Reporte de Falla
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="maintenance-filters">
+                <div class="search-box" style="max-width: 300px;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar equipo o técnico...">
+                </div>
+                <div class="maintenance-type-filters">
+                    <button class="type-filter-btn active" data-type="all">Todos</button>
+                    <button class="type-filter-btn" data-type="preventivo">Preventivo</button>
+                    <button class="type-filter-btn" data-type="correctivo">Correctivo</button>
+                </div>
+            </div>
+
+            <!-- Maintenance List -->
+            <div class="maintenance-list">
+                <!-- Mantenimiento 1 -->
+                <div class="maintenance-card" data-type="correctivo" data-status="en_progreso">
+                    <div class="maintenance-header">
+                        <div>
+                            <div class="maintenance-id">ID: #1</div>
+                            <h3 class="maintenance-equipment">Osciloscopio Digital</h3>
+                            <span class="maintenance-type correctivo">Correctivo</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Descripción</span>
+                            <span class="detail-value">Pantalla con líneas horizontales</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Técnico Asignado</span>
+                            <span class="detail-value">Carlos Mendoza</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fecha</span>
+                            <span class="detail-value">18/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-status">
+                        <span class="status-badge in-progress">En Progreso</span>
+                        <button class="btn btn-sm btn-outline" onclick="updateMaintenanceStatus(1)">
+                            Actualizar Estado
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mantenimiento 2 -->
+                <div class="maintenance-card" data-type="preventivo" data-status="pendiente">
+                    <div class="maintenance-header">
+                        <div>
+                            <div class="maintenance-id">ID: #2</div>
+                            <h3 class="maintenance-equipment">Laptop Dell Inspiron</h3>
+                            <span class="maintenance-type preventive">Preventivo</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Descripción</span>
+                            <span class="detail-value">Limpieza interna y cambio de pasta térmica</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Técnico Asignado</span>
+                            <span class="detail-value">Carlos Mendoza</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fecha</span>
+                            <span class="detail-value">20/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-status">
+                        <span class="status-badge pending">Pendiente</span>
+                        <button class="btn btn-sm btn-outline" onclick="updateMaintenanceStatus(2)">
+                            Actualizar Estado
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mantenimiento 3 -->
+                <div class="maintenance-card" data-type="correctivo" data-status="completado">
+                    <div class="maintenance-header">
+                        <div>
+                            <div class="maintenance-id">ID: #3</div>
+                            <h3 class="maintenance-equipment">Multímetro Digital</h3>
+                            <span class="maintenance-type correctivo">Correctivo</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Descripción</span>
+                            <span class="detail-value">Batería no carga</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Técnico Asignado</span>
+                            <span class="detail-value">Roberto Sánchez</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fecha</span>
+                            <span class="detail-value">15/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-status">
+                        <span class="status-badge completed">Completado</span>
+                        <button class="btn btn-sm btn-outline" onclick="updateMaintenanceStatus(3)">
+                            Ver Detalles
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mantenimiento 4 -->
+                <div class="maintenance-card" data-type="preventivo" data-status="pendiente">
+                    <div class="maintenance-header">
+                        <div>
+                            <div class="maintenance-id">ID: #4</div>
+                            <h3 class="maintenance-equipment">Router Cisco 2900</h3>
+                            <span class="maintenance-type preventive">Preventivo</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Descripción</span>
+                            <span class="detail-value">Actualización de firmware y revisión de configuración</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Técnico Asignado</span>
+                            <span class="detail-value">Roberto Sánchez</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fecha</span>
+                            <span class="detail-value">22/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="maintenance-status">
+                        <span class="status-badge pending">Pendiente</span>
+                        <button class="btn btn-sm btn-outline" onclick="updateMaintenanceStatus(4)">
+                            Actualizar Estado
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
