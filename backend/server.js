@@ -8,7 +8,7 @@ const app = express();
 
 // Middlewares necesarios
 app.use(cors());
-app.use(express.json()); // Permite recibir datos en formato JSON [cite: 184]
+app.use(express.json()); // Permite recibir datos en formato JSON
 
 
 const authRoutes = require('./routes/auth');
