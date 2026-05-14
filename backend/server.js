@@ -31,6 +31,9 @@ app.use('/api/mantenimiento', mantenimiento);
 const laboratorio = require('./routes/laboratorio');
 app.use('/api/laboratorios', laboratorio);
 
+const usuarioRoutes = require('./routes/usuarios');
+app.use('/api/usuarios', usuarioRoutes);
+
 // Iniciamos el puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
