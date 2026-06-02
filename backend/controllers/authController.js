@@ -28,6 +28,11 @@ const registro = (req, res) => {
 const login = (req, res) => {
     const { email, password } = req.body;
 
+    // Validar que los campos no lleguen vacíos
+    if (!email || !password) {
+        return res.status(400).json({ mensaje: 'Email y password son requeridos' });
+    }
+
     Auth.findByEmail(email, (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         if (results.length === 0) return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
@@ -44,7 +49,12 @@ const login = (req, res) => {
             { expiresIn: process.env.JWT_EXPIRES }
         );
 
-        res.json({ mensaje: 'Login exitoso', token });
+        // Devolver token Y nombre para que el frontend lo guarde en sessionStorage
+        res.json({
+            mensaje: 'Login exitoso',
+            token,
+            nombre: usuario.nombre   // el frontend lo guarda en sessionStorage
+        });
     });
 };
 
