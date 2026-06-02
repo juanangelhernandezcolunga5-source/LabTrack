@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Préstamo - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-container {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        .readonly-field {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="nombreUsuario">Cargando...</h4>
+                    <p id="correoUsuario">cargando@itsr.edu.mx</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-tachometer-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+                <a href="inventario.html" class="menu-item">
+                    <i class="fas fa-boxes menu-item-icon"></i>
+                    <span class="menu-item-text">Inventario</span>
+                </a>
+                <a href="prestamos.html" class="menu-item active">
+                    <i class="fas fa-hand-holding menu-item-icon"></i>
+                    <span class="menu-item-text">Préstamos</span>
+                </a>
+                <a href="mantenimiento.html" class="menu-item">
+                    <i class="fas fa-tools menu-item-icon"></i>
+                    <span class="menu-item-text">Mantenimiento</span>
+                </a>
+                <a href="catalogo.html" class="menu-item">
+                    <i class="fas fa-store menu-item-icon"></i>
+                    <span class="menu-item-text">Ver Catálogo</span>
+                </a>
+                <a href="configuracion-admin.html" class="menu-item">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Configuración</span>
+                </a>
+                <a href="#" class="menu-item" style="margin-top: 50px; color: var(--danger);" onclick="cerrarSesion()">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Actualizar Estado del Préstamo</h1>
+                    <p class="page-subtitle">Modifica el estado actual de este préstamo</p>
+                </div>
+                <button class="btn btn-outline" onclick="window.location.href='prestamos.html'">
+                    <i class="fas fa-arrow-left"></i> Volver a Préstamos
+                </button>
+            </div>
+
+            <div id="alerta" style="max-width: 600px;"></div>
+
+            <div id="spinner" style="text-align: center; padding: 50px;">
+                <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--primary-green);"></i>
+                <p style="margin-top: 15px; color: var(--text-light);">Cargando detalles del préstamo...</p>
+            </div>
+
+            <div class="form-container" id="formContainer" style="display: none;">
+                <form id="editarPrestamoForm" onsubmit="event.preventDefault(); guardarEdicion()">
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="txtEquipo">Equipo</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-microchip form-input-icon"></i>
+                            <input type="text" class="form-input readonly-field" id="txtEquipo" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="txtUsuario">Usuario asignado</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-user form-input-icon"></i>
+                            <input type="text" class="form-input readonly-field" id="txtUsuario" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="selectEstado">Estado del Préstamo</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-info-circle form-input-icon"></i>
+                            <select class="form-input" id="selectEstado" required>
+                                <option value="Activo">Activo</option>
+                                <option value="Completado">Completado</option>
+                                <option value="Retrasado">Retrasado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-orange btn-lg" id="btnGuardar" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-save"></i> Guardar Estado
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/prestamos-editar.js"></script>
+</body>
+</html>
