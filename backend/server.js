@@ -14,9 +14,11 @@ app.use(express.json()); // Permite recibir datos en formato JSON
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-// Ruta de bienvenida (Requisito del proyecto) 
+// Ruta protegida de inicio — requiere token JWT válido (Requisito del proyecto)
+const verificarToken = require('./middlewares/authMiddleware');
 const inicioController = require('./controllers/inicioController');
-app.get('/api/inicio', inicioController.getInicio);
+app.get('/api/inicio', verificarToken, inicioController.getInicio);
+
 
 const inventarioRoutes = require('./routes/inventario');
 app.use('/api/inventario', inventarioRoutes);
