@@ -26,8 +26,8 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="user-info">
-                    <h4>Administrador</h4>
-                    <p>admin@itsr.edu.mx</p>
+                    <h4 id="nombreUsuario">Cargando...</h4>
+                    <p id="correoUsuario">cargando@itsr.edu.mx</p>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <i class="fas fa-cog menu-item-icon"></i>
                     <span class="menu-item-text">Configuración</span>
                 </a>
-                <a href="login.html" class="menu-item" style="margin-top: 50px; color: var(--danger);">
+                <a href="#" class="menu-item" style="margin-top: 50px; color: var(--danger);" onclick="cerrarSesion()">
                     <i class="fas fa-sign-out-alt menu-item-icon"></i>
                     <span class="menu-item-text">Cerrar Sesión</span>
                 </a>
@@ -71,19 +71,26 @@
                     <h1 class="page-title">Gestión de Préstamos</h1>
                     <p class="page-subtitle">Controla las solicitudes, devoluciones y retrasos</p>
                 </div>
-                <button class="add-btn">
+                <button class="add-btn" id="btnNuevoPrestamo">
                     <i class="fas fa-plus"></i>
                     Nuevo Préstamo
                 </button>
             </div>
 
+            <!-- Alertas y Spinner -->
+            <div id="alerta" style="margin-top: 20px;"></div>
+            <div id="spinner" style="text-align: center; padding: 50px;">
+                <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--primary-green);"></i>
+                <p style="margin-top: 15px; color: var(--text-light);">Cargando préstamos...</p>
+            </div>
+
             <!-- Filters -->
-            <div class="loan-filters">
+            <div class="loan-filters" id="contentHeader" style="display: none;">
                 <div class="search-box" style="max-width: 300px;">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar por ID o matrícula...">
+                    <input type="text" id="searchInput" placeholder="Buscar por equipo o matrícula...">
                 </div>
-                <div class="filter-tabs">
+                <div class="filter-tabs" id="filterTabs">
                     <button class="filter-tab active" data-status="all">Todos</button>
                     <button class="filter-tab" data-status="activo">Activos</button>
                     <button class="filter-tab" data-status="retrasado">Retrasados</button>
@@ -106,114 +113,8 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>Router Cisco 2900</td>
-                            <td>Juan Angel Hernandez Colunga</td>
-                            <td>22224029</td>
-                            <td>15/04/2026</td>
-                            <td>22/04/2026</td>
-                            <td class="status-cell">
-                                <span class="status-dot active"></span>
-                                <span class="badge badge-success">Activo</span>
-                            </td>
-                            <td>
-                                <div class="loan-actions">
-                                    <button class="return-btn" onclick="returnEquipment(1)">
-                                        <i class="fas fa-check"></i> Devolver
-                                    </button>
-                                    <button class="report-btn" onclick="reportIssue(1)">
-                                        <i class="fas fa-exclamation"></i> Reportar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>Arduino UNO</td>
-                            <td>Miguel Ángel Nuñez Torres</td>
-                            <td>22224006</td>
-                            <td>10/04/2026</td>
-                            <td>17/04/2026</td>
-                            <td class="status-cell">
-                                <span class="status-dot completed"></span>
-                                <span class="badge badge-info">Completado</span>
-                            </td>
-                            <td>
-                                <div class="loan-actions">
-                                    <button class="return-btn" style="opacity: 0.5; cursor: not-allowed;" disabled>
-                                        <i class="fas fa-check"></i> Devolver
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#3</td>
-                            <td>Raspberry Pi 4</td>
-                            <td>Juan Angel Hernandez Colunga</td>
-                            <td>22224029</td>
-                            <td>18/04/2026</td>
-                            <td>25/04/2026</td>
-                            <td class="status-cell">
-                                <span class="status-dot overdue"></span>
-                                <span class="badge badge-danger">Retrasado</span>
-                            </td>
-                            <td>
-                                <div class="loan-actions">
-                                    <button class="return-btn" onclick="returnEquipment(3)">
-                                        <i class="fas fa-check"></i> Devolver
-                                    </button>
-                                    <button class="report-btn" onclick="reportIssue(3)">
-                                        <i class="fas fa-exclamation"></i> Reportar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#4</td>
-                            <td>Switch 24 Puertos</td>
-                            <td>Estudiante Invitado</td>
-                            <td>N/A</td>
-                            <td>19/04/2026</td>
-                            <td>26/04/2026</td>
-                            <td class="status-cell">
-                                <span class="status-dot active"></span>
-                                <span class="badge badge-success">Activo</span>
-                            </td>
-                            <td>
-                                <div class="loan-actions">
-                                    <button class="return-btn" onclick="returnEquipment(4)">
-                                        <i class="fas fa-check"></i> Devolver
-                                    </button>
-                                    <button class="report-btn" onclick="reportIssue(4)">
-                                        <i class="fas fa-exclamation"></i> Reportar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5</td>
-                            <td>Multímetro Digital</td>
-                            <td>Ana López García</td>
-                            <td>22224015</td>
-                            <td>19/04/2026</td>
-                            <td>26/04/2026</td>
-                            <td class="status-cell">
-                                <span class="status-dot active"></span>
-                                <span class="badge badge-success">Activo</span>
-                            </td>
-                            <td>
-                                <div class="loan-actions">
-                                    <button class="return-btn" onclick="returnEquipment(5)">
-                                        <i class="fas fa-check"></i> Devolver
-                                    </button>
-                                    <button class="report-btn" onclick="reportIssue(5)">
-                                        <i class="fas fa-exclamation"></i> Reportar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody id="prestamosTableBody">
+                        <!-- Los préstamos se cargarán dinámicamente aquí -->
                     </tbody>
                 </table>
             </div>
@@ -221,5 +122,6 @@
     </div>
 
     <script src="js/app.js"></script>
+    <script src="js/prestamos.js"></script>
 </body>
 </html>
