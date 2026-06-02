@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Equipo - LabTrack</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-container {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span>LabTrack</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4 id="nombreUsuario">Cargando...</h4>
+                    <p id="correoUsuario">cargando@itsr.edu.mx</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-tachometer-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+                <a href="inventario.html" class="menu-item active">
+                    <i class="fas fa-boxes menu-item-icon"></i>
+                    <span class="menu-item-text">Inventario</span>
+                </a>
+                <a href="prestamos.html" class="menu-item">
+                    <i class="fas fa-hand-holding menu-item-icon"></i>
+                    <span class="menu-item-text">Préstamos</span>
+                </a>
+                <a href="mantenimiento.html" class="menu-item">
+                    <i class="fas fa-tools menu-item-icon"></i>
+                    <span class="menu-item-text">Mantenimiento</span>
+                </a>
+                <a href="catalogo.html" class="menu-item">
+                    <i class="fas fa-store menu-item-icon"></i>
+                    <span class="menu-item-text">Ver Catálogo</span>
+                </a>
+                <a href="configuracion-admin.html" class="menu-item">
+                    <i class="fas fa-cog menu-item-icon"></i>
+                    <span class="menu-item-text">Configuración</span>
+                </a>
+                <a href="#" class="menu-item" style="margin-top: 50px; color: var(--danger);" onclick="cerrarSesion()">
+                    <i class="fas fa-sign-out-alt menu-item-icon"></i>
+                    <span class="menu-item-text">Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Registrar Nuevo Equipo</h1>
+                    <p class="page-subtitle">Añade un equipo o componente al inventario del laboratorio</p>
+                </div>
+                <button class="btn btn-outline" onclick="window.location.href='inventario.html'">
+                    <i class="fas fa-arrow-left"></i> Volver a Inventario
+                </button>
+            </div>
+
+            <div id="alerta" style="max-width: 600px;"></div>
+
+            <div class="form-container">
+                <form id="registroEquipoForm" onsubmit="event.preventDefault(); registrarEquipo()">
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="inputNombre">Nombre del Equipo</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-microchip form-input-icon"></i>
+                            <input type="text" class="form-input" id="inputNombre" placeholder="Ej. Router Cisco 2900" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="selectCategoria">Categoría</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-tags form-input-icon"></i>
+                            <select class="form-input" id="selectCategoria" required>
+                                <option value="" disabled selected>Selecciona una categoría</option>
+                                <option value="Redes">Redes</option>
+                                <option value="Electrónica">Electrónica</option>
+                                <option value="Cómputo">Cómputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="inputCantidad">Cantidad Inicial</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-sort-numeric-up form-input-icon"></i>
+                            <input type="number" class="form-input" id="inputCantidad" placeholder="Ej. 5" min="0" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg" id="btnGuardar" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-save"></i> Guardar Equipo
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/inventario-registrar.js"></script>
+</body>
+</html>
