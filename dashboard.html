@@ -26,8 +26,8 @@
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="user-info">
-                    <h4>Administrador</h4>
-                    <p>admin@itsr.edu.mx</p>
+                    <h4 id="nombreUsuario">Cargando...</h4>
+                    <p id="correoUsuario">cargando@itsr.edu.mx</p>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <i class="fas fa-cog menu-item-icon"></i>
                     <span class="menu-item-text">Configuración</span>
                 </a>
-                <a href="login.html" class="menu-item" style="margin-top: 50px; color: var(--danger);">
+                <a href="#" class="menu-item" style="margin-top: 50px; color: var(--danger);" onclick="cerrarSesion()">
                     <i class="fas fa-sign-out-alt menu-item-icon"></i>
                     <span class="menu-item-text">Cerrar Sesión</span>
                 </a>
@@ -79,8 +79,17 @@
                 </div>
             </div>
 
-            <!-- Stats Cards -->
-            <div class="stats-cards">
+            <!-- Alertas y Spinner -->
+            <div id="alerta" style="margin-top: 20px;"></div>
+            <div id="spinner" style="text-align: center; padding: 50px;">
+                <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--primary-green);"></i>
+                <p style="margin-top: 15px; color: var(--text-light);">Cargando resumen operativo...</p>
+            </div>
+
+            <!-- Contenido (se muestra cuando carga) -->
+            <div id="contenido" style="display: none;">
+                <!-- Stats Cards -->
+                <div class="stats-cards">
                 <div class="stat-card">
                     <div class="stat-icon green">
                         <i class="fas fa-hand-holding"></i>
@@ -193,6 +202,7 @@
                     </table>
                 </div>
             </div>
+            </div> <!-- /#contenido -->
         </main>
     </div>
 
