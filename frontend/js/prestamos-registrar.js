@@ -35,9 +35,11 @@ function cargarDatos() {
 
         // Llenar Usuarios
         if (sessionStorage.getItem('rol') === 'estudiante') {
+            selectUsuario.innerHTML = ''; // Limpiar el "Selecciona un usuario..."
             const option = document.createElement('option');
-            option.value = 'auto'; // El backend lo cambiará por su ID real
+            option.value = 'auto'; 
             option.textContent = `${nombre} (Tu cuenta)`;
+            option.selected = true;
             selectUsuario.appendChild(option);
             selectUsuario.disabled = true;
         } else {
