@@ -3,14 +3,18 @@
  * Verifica sesión, carga datos desde /api/inicio y permite cerrar sesión.
  */
 
-const API    = 'http://localhost:3000/api';
+const API    = '/api';
 const token  = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 
 // 1. Verificar sesión al cargar la página
-// Si no hay token, redirigir al login inmediatamente
-if (!token) {
-    window.location.href = 'login.html';
+// Si no hay token, o el rol no es admin, redirigir
+if (!token || sessionStorage.getItem('rol') !== 'admin') {
+    if (!token) {
+        window.location.href = 'login.html';
+    } else {
+        window.location.href = 'inventario.html';
+    }
 }
 
 // 2. Mostrar el nombre del usuario logueado en el sidebar
@@ -54,13 +58,17 @@ function cargarInicio() {
             const mantEl = document.getElementById('mantenimiento');
             if (mantEl) mantEl.textContent = data.resumen.en_mantenimiento || '0';
 
-            // (Opcional) Podemos actualizar 'devoluciones' y 'retrasos' si el backend nos los diera en un futuro.
-            // Por ahora ponemos un valor estático para limpiar los hardcodeados del HTML original.
+            // Actualizar devoluciones y retrasos
             const devolucionesEl = document.getElementById('devoluciones');
-            if (devolucionesEl) devolucionesEl.textContent = '0';
+            if (devolucionesEl) devolucionesEl.textContent = data.resumen.devoluciones || '0';
             
             const retrasosEl = document.getElementById('retrasos');
-            if (retrasosEl) retrasosEl.textContent = '0';
+            if (retrasosEl) retrasosEl.textContent = data.resumen.retrasos || '0';
+        }
+
+        // 7. Renderizar tabla de actividad reciente
+        if (data.recientes) {
+            renderizarActividadReciente(data.recientes);
         }
     })
     .catch(err => {
@@ -71,7 +79,44 @@ function cargarInicio() {
     });
 }
 
-// 7. Cerrar sesión
+// 7. Renderizar actividad reciente
+function renderizarActividadReciente(recientes) {
+    const tbody = document.querySelector('.recent-activity tbody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    if (recientes.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay actividad reciente</td></tr>';
+        return;
+    }
+
+    recientes.forEach(loan => {
+        let badgeClass = 'badge-success';
+        if (loan.estado === 'Completado') badgeClass = 'badge-info';
+        else if (loan.estado === 'Retrasado') badgeClass = 'badge-danger';
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>#${loan.id}</td>
+            <td>${loan.equipo}</td>
+            <td>${loan.usuario}</td>
+            <td>${new Date(loan.fecha_prestamo).toLocaleDateString('es-MX')}</td>
+            <td><span class="badge ${badgeClass}">${loan.estado}</span></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// 8. Botones rápidos
+document.addEventListener('DOMContentLoaded', () => {
+    const btnPrestamo = document.querySelector('button[data-action="nuevo-prestamo"]');
+    if (btnPrestamo) btnPrestamo.onclick = () => window.location.href = 'prestamos-registrar.html';
+    
+    const btnEquipo = document.querySelector('button[data-action="agregar-equipo"]');
+    if (btnEquipo) btnEquipo.onclick = () => window.location.href = 'inventario-registrar.html';
+});
+
+// 9. Cerrar sesión
 function cerrarSesion() {
     if (!confirm('¿Seguro que deseas cerrar sesión?')) return;
     sessionStorage.clear(); // Elimina token y nombre

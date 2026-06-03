@@ -3,7 +3,7 @@
  * Se conecta a /api/inventario usando JWT.
  */
 
-const API = 'http://localhost:3000/api/inventario';
+const API = '/api/inventario';
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 
@@ -17,10 +17,17 @@ if (!token) {
 document.getElementById('nombreUsuario').textContent = nombre || 'Usuario';
 document.getElementById('correoUsuario').textContent = 'Sesión Activa';
 
-// 2. Redirigir a Crear Equipo
-document.getElementById('btnAgregarEquipo').onclick = () => {
-    window.location.href = 'inventario-registrar.html';
-};
+// 2. Redirigir a Crear Equipo (Ocultar si es estudiante)
+const btnAgregar = document.getElementById('btnAgregarEquipo');
+if (sessionStorage.getItem('rol') === 'estudiante') {
+    if (btnAgregar) btnAgregar.style.display = 'none';
+} else {
+    if (btnAgregar) {
+        btnAgregar.onclick = () => {
+            window.location.href = 'inventario-registrar.html';
+        };
+    }
+}
 
 // 3. Cargar todos los equipos
 function cargarInventario() {
@@ -87,7 +94,7 @@ function renderizarEquipos(equipos) {
                     <span class="stock-badge ${badgeClass}">${eq.estado}</span>
                     <span>${eq.cantidad} unidades</span>
                 </div>
-                <div class="product-actions">
+                <div class="product-actions" style="display: ${sessionStorage.getItem('rol') === 'estudiante' ? 'none' : 'flex'};">
                     <button class="edit-btn" onclick="editarEquipo(${eq.id})">
                         <i class="fas fa-edit"></i> Editar
                     </button>

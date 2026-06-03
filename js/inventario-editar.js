@@ -4,7 +4,7 @@
  * y envía las actualizaciones con PUT /api/inventario/:id usando JWT.
  */
 
-const API = 'http://localhost:3000/api/inventario';
+const API = '/api/inventario';
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 

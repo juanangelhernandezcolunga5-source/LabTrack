@@ -3,9 +3,9 @@
  * Carga usuarios y equipos en select, luego hace POST /api/prestamos
  */
 
-const API_PRESTAMOS   = 'http://localhost:3000/api/prestamos';
-const API_USUARIOS    = 'http://localhost:3000/api/usuarios';
-const API_INVENTARIO  = 'http://localhost:3000/api/inventario';
+const API_PRESTAMOS   = '/api/prestamos';
+const API_USUARIOS    = '/api/usuarios';
+const API_INVENTARIO  = '/api/inventario';
 
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
@@ -34,12 +34,20 @@ function cargarDatos() {
         const selectEquipo  = document.getElementById('selectEquipo');
 
         // Llenar Usuarios
-        usuarios.forEach(u => {
+        if (sessionStorage.getItem('rol') === 'estudiante') {
             const option = document.createElement('option');
-            option.value = u.id;
-            option.textContent = `${u.nombre} (${u.email})`;
+            option.value = 'auto'; // El backend lo cambiará por su ID real
+            option.textContent = `${nombre} (Tu cuenta)`;
             selectUsuario.appendChild(option);
-        });
+            selectUsuario.disabled = true;
+        } else {
+            usuarios.forEach(u => {
+                const option = document.createElement('option');
+                option.value = u.id;
+                option.textContent = `${u.nombre} (${u.email})`;
+                selectUsuario.appendChild(option);
+            });
+        }
 
         // Llenar Equipos (Solo los disponibles, idealmente > 0 cantidad)
         equipos.forEach(e => {

@@ -4,7 +4,18 @@
  * y redirige al dashboard si las credenciales son correctas.
  */
 
-const API = 'http://localhost:3000/api/auth';
+const API = '/api/auth';
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Tabs para tipo de usuario
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
+});
 
 function login() {
     const email    = document.getElementById('inputEmail').value.trim();
@@ -35,14 +46,26 @@ function login() {
                 return;
             }
 
-            // 5. Guardar token y nombre en sessionStorage
+            // Verificar que el tipo de usuario seleccionado coincida con el rol real
+            const tipoUsuario = document.querySelector('.tab-btn.active').dataset.type;
+            if (data.rol !== tipoUsuario) {
+                mostrarAlerta(`Esta cuenta no es de ${tipoUsuario === 'admin' ? 'administrador' : 'estudiante'}.`, 'error');
+                return;
+            }
+
+            // 5. Guardar token, nombre y rol en sessionStorage
             sessionStorage.setItem('token',  data.token);
             sessionStorage.setItem('nombre', data.nombre);
+            sessionStorage.setItem('rol',    data.rol);
 
-            // 6. Redirigir al dashboard de LabTrack
+            // 6. Redirigir según el rol
             mostrarAlerta('¡Bienvenido! Redirigiendo...', 'success');
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                if (data.rol === 'admin') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    window.location.href = 'inventario.html';
+                }
             }, 800);
         })
         .catch(() => {

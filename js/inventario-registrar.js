@@ -3,7 +3,7 @@
  * Se conecta a POST /api/inventario usando JWT.
  */
 
-const API = 'http://localhost:3000/api/inventario';
+const API = '/api/inventario';
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 

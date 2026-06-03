@@ -10,6 +10,9 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Permite recibir datos en formato JSON
 
+// Servir el frontend (la carpeta principal que está un nivel arriba)
+const path = require('path');
+app.use(express.static(path.join(__dirname, '..')));
 
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);

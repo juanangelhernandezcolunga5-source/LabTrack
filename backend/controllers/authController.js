@@ -42,18 +42,19 @@ const login = (req, res) => {
 
         if (!passwordCorrecta) return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
 
-        // Generar Token JWT
+        // Generar Token JWT (Ahora incluyendo el rol)
         const token = jwt.sign(
-            { id: usuario.id, email: usuario.email, nombre: usuario.nombre },
+            { id: usuario.id, email: usuario.email, nombre: usuario.nombre, rol: usuario.rol },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES }
         );
 
-        // Devolver token Y nombre para que el frontend lo guarde en sessionStorage
+        // Devolver token, nombre Y ROL para que el frontend lo guarde
         res.json({
             mensaje: 'Login exitoso',
             token,
-            nombre: usuario.nombre   // el frontend lo guarda en sessionStorage
+            nombre: usuario.nombre,
+            rol: usuario.rol
         });
     });
 };

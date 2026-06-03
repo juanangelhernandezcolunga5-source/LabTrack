@@ -3,7 +3,7 @@
  * Se conecta a /api/prestamos usando JWT.
  */
 
-const API = 'http://localhost:3000/api/prestamos';
+const API = '/api/prestamos';
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 
@@ -17,10 +17,13 @@ if (!token) {
 document.getElementById('nombreUsuario').textContent = nombre || 'Usuario';
 document.getElementById('correoUsuario').textContent = 'Sesión Activa';
 
-// Redirigir a crear préstamo
-document.getElementById('btnNuevoPrestamo').onclick = () => {
-    window.location.href = 'prestamos-registrar.html';
-};
+// Redirigir a crear préstamo (Disponible para admin y estudiante)
+const btnNuevo = document.getElementById('btnNuevoPrestamo');
+if (btnNuevo) {
+    btnNuevo.onclick = () => {
+        window.location.href = 'prestamos-registrar.html';
+    };
+}
 
 // 2. Cargar datos
 function cargarPrestamos() {
@@ -93,7 +96,7 @@ function renderizarTabla(prestamos) {
                 <span class="status-dot ${dotClass}"></span>
                 <span class="badge ${badgeClass}">${p.estado}</span>
             </td>
-            <td>
+            <td style="display: ${sessionStorage.getItem('rol') === 'estudiante' ? 'none' : 'table-cell'};">
                 <div class="loan-actions">
                     <button class="return-btn" onclick="editarPrestamo(${p.id})">
                         <i class="fas fa-edit"></i> Editar

@@ -11,6 +11,17 @@ const Prestamo = {
         db.query(sql, callback);
     },
 
+    // Obtener los préstamos de un usuario específico
+    getByUsuarioId: (usuario_id, callback) => {
+        const sql = `
+            SELECT p.*, u.nombre as usuario, e.nombre as equipo 
+            FROM prestamos p 
+            JOIN usuarios u ON p.usuario_id = u.id 
+            JOIN inventario e ON p.equipo_id = e.id
+            WHERE p.usuario_id = ?`;
+        db.query(sql, [usuario_id], callback);
+    },
+
     // 2. Obtener un préstamo específico por su ID
     getById: (id, callback) => {
         db.query('SELECT * FROM prestamos WHERE id = ?', [id], callback);

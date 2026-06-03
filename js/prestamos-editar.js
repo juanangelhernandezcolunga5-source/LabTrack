@@ -3,7 +3,7 @@
  * Obtiene el ID de la URL y hace PUT /api/prestamos/:id
  */
 
-const API = 'http://localhost:3000/api/prestamos';
+const API = '/api/prestamos';
 const token = sessionStorage.getItem('token');
 const nombre = sessionStorage.getItem('nombre');
 

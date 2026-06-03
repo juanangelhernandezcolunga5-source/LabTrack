@@ -5,7 +5,7 @@
  * Al registrar con éxito redirige al login.
  */
 
-const API = 'http://localhost:3000/api/auth';
+const API = '/api/auth';
 
 function registro() {
     const nombre          = document.getElementById('inputNombre').value.trim();
