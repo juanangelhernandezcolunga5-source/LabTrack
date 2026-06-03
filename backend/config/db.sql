@@ -36,7 +36,7 @@ CREATE TABLE prestamos (
     FOREIGN KEY (equipo_id) REFERENCES inventario(id)
 );
 
-CREATE TABLE IF NOT EXISTS mantenimiento (
+CREATE TABLE mantenimiento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     equipo_id INT NOT NULL,
     tipo ENUM('Preventivo', 'Correctivo') NOT NULL,
@@ -47,5 +47,11 @@ CREATE TABLE IF NOT EXISTS mantenimiento (
     FOREIGN KEY (equipo_id) REFERENCES inventario(id)
 );
 
-
-
+-- 6. Tabla de Laboratorios (Para cumplir con 5 módulos en el Backend)
+CREATE TABLE IF NOT EXISTS laboratorios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(100) NOT NULL,
+    encargado VARCHAR(100) NOT NULL,
+    capacidad INT DEFAULT 30
+);
