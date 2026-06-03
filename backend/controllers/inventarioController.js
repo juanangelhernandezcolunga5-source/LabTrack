@@ -57,10 +57,20 @@ const inventarioCtrl = {
     // Eliminar
     delete: (req, res) => {
         const id = req.params.id;
-        Inventario.delete(id, (err, result) => {
+        
+        // Verificar que no haya préstamos activos o retrasados de este equipo
+        db.query('SELECT id FROM prestamos WHERE equipo_id = ? AND estado != "Completado"', [id], (err, results) => {
             if (err) return res.status(500).json({ error: err.message });
-            if (result.affectedRows === 0) return res.status(404).json({ mensaje: 'Equipo no encontrado para eliminar' });
-            res.json({ mensaje: 'Equipo eliminado exitosamente' });
+            
+            if (results.length > 0) {
+                return res.status(400).json({ mensaje: 'No se puede eliminar el equipo porque tiene préstamos activos. Pida su devolución antes de borrarlo.' });
+            }
+
+            Inventario.delete(id, (err, result) => {
+                if (err) return res.status(500).json({ error: err.message });
+                if (result.affectedRows === 0) return res.status(404).json({ mensaje: 'Equipo no encontrado para eliminar' });
+                res.json({ mensaje: 'Equipo eliminado exitosamente' });
+            });
         });
     },
 

@@ -338,6 +338,13 @@ img {
     margin-top: 5px;
 }
 
+/* Auth Form o Inputs con Ícono */
+.auth-form .form-input,
+.form-input-icon ~ .form-input,
+.form-input-icon + .form-input {
+    padding-left: 45px;
+}
+
 /* Checkbox */
 .checkbox-container {
     display: flex;

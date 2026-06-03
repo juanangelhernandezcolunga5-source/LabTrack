@@ -32,8 +32,8 @@ CREATE TABLE prestamos (
     equipo_id INT NOT NULL,
     fecha_prestamo DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado ENUM('Activo', 'Completado', 'Retrasado') DEFAULT 'Activo',
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (equipo_id) REFERENCES inventario(id)
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (equipo_id) REFERENCES inventario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE mantenimiento (
@@ -44,7 +44,7 @@ CREATE TABLE mantenimiento (
     tecnico_asignado VARCHAR(100) DEFAULT 'Sin Asignar',
     fecha_reporte DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado ENUM('Pendiente', 'En Progreso', 'Completado') DEFAULT 'Pendiente',
-    FOREIGN KEY (equipo_id) REFERENCES inventario(id)
+    FOREIGN KEY (equipo_id) REFERENCES inventario(id) ON DELETE CASCADE
 );
 
 -- 6. Tabla de Laboratorios (Para cumplir con 5 módulos en el Backend)
