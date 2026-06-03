@@ -48,7 +48,7 @@ CREATE TABLE mantenimiento (
 );
 
 -- 6. Tabla de Laboratorios (Para cumplir con 5 módulos en el Backend)
-CREATE TABLE IF NOT EXISTS laboratorios (
+CREATE TABLE laboratorios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
